@@ -25,3 +25,11 @@ def test_apple_phone_2():
 def test_apple_phone_3():
     with pytest.raises(ValueError):
         Item(100, 50000, '10')
+
+
+def test_string_to_number():
+    assert Item.string_to_number("54321") == 54321
+    assert Item.string_to_number("4.1") == 4
+    assert Item.string_to_number("qrwe") is None
+
+
