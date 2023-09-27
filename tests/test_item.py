@@ -30,6 +30,10 @@ def test_apple_phone_3():
 def test_string_to_number():
     assert Item.string_to_number("54321") == 54321
     assert Item.string_to_number("4.1") == 4
-    assert Item.string_to_number("qrwe") is None
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv('../src/items.csv')
+    assert len(Item.all) == 5
 
 

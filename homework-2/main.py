@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     item.name = 'СуперСмартфон'
 
-    Item.instantiate_from_csv('../src/items.csv')
+    print(Item.instantiate_from_csv('../src/items.csv'))
     assert len(Item.all) == 6
 
     item1 = Item.all[0]
