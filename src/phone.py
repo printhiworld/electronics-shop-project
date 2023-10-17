@@ -2,7 +2,6 @@ from src.item import Item
 
 
 class Phone(Item):
-    pay_rate = 1.0
     all = []
 
     def __init__(self, name: str, price: float, amount: int, sim) -> None:
