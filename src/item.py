@@ -55,3 +55,8 @@ class Item:
     @staticmethod
     def string_to_number(n):
         return int(float(n))
+
+    def __add__(self, other):
+        if other.__class__ .__name__ == 'Phone' or other.__class__ .__name__ == 'Item':
+            return self.amount + other.amount
+        return None

@@ -1,5 +1,7 @@
 import pytest
 from src.item import Item
+from src.phone import Phone
+
 
 
 @pytest.fixture
@@ -45,6 +47,29 @@ def test_repr():
 def test_str():
     item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == 'Смартфон'
+
+
+@pytest.fixture
+def a_phone():
+    return Phone('ipone', 50000, 10, 2)
+
+
+
+def test_repr():
+    phone1 = Phone("Смартфон", 10000, 20, 2)
+    assert repr(phone1) == "Phone('Смартфон', 10000, 20, 2)"
+
+
+def test_str():
+    phone1 = Phone("Смартфон", 10000, 20, 2)
+    assert str(phone1) == 'Смартфон'
+
+def test_add():
+    item1= Item('ipone', 50000, 10)
+    phone1 = Phone("Смартфон", 10000, 20, 2)
+    assert item1 + phone1 == 30
+
+
 
 
 
