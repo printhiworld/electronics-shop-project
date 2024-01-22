@@ -41,22 +41,38 @@ class Item:
         self.__name = name
 
     @classmethod
-    def instantiate_from_csv(cls, file):
-        with open(file, 'r', encoding='latin-1') as file:
-            lines = file.readlines()
-            lines = lines[1:]
-            for row in lines:
-                name, price, amount = row.split(',')
-                price = int(price)
-                amount = int(amount)
-                cls(name, price, amount)
-        return cls.all
+    def instantiate_from_csv(cls, file='../src/items.csv'):
+        try:
+            with open(file, 'r', encoding='latin-1') as file:
+                lines = file.readlines()
+                lines = lines[1:]
+                for row in lines:
+                    try:
+                        name, price, amount = row.split(',')
+                        price = int(price)
+                        amount = int(amount)
+                        cls(name, price, amount)
+                    except Exception:
+                        raise InstantiateCSVError
+
+            return cls.all
+        except FileNotFoundError:
+            print('FileNotFoundError: Отсутствует файл items.csv')
 
     @staticmethod
     def string_to_number(n):
         return int(float(n))
 
     def __add__(self, other):
-        if other.__class__ .__name__ == 'Phone' or other.__class__ .__name__ == 'Item':
+        if other.__class__.__name__ == 'Phone' or other.__class__.__name__ == 'Item':
             return self.amount + other.amount
         return None
+
+
+class InstantiateCSVError(Exception):
+    def __init__(self, *args):
+        self.message = args[0] if args else 'Файл items.csv поврежден'
+
+    def __str__(self):
+        return self.message
+

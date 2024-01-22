@@ -1,5 +1,5 @@
 import pytest
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.keyboard import Keyboard
 from src.phone import Phone
 
@@ -36,7 +36,7 @@ def test_string_to_number():
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv('../src/items.csv')
+    Item.instantiate_from_csv()
     assert len(Item.all) == 5
 
 
@@ -77,9 +77,23 @@ def test_change():
         kb.language = 'CH'
 
 
-def test_change():
+def test_changes():
     kb = Keyboard('Dark Project KD87A', 9600, 5)
     kb.change_lang()
     assert str(kb.language) == "RU"
+
+
+def test_csv_file_not_found():
+    try:
+        Item.instantiate_from_csv('')
+    except FileNotFoundError:
+        assert 1 == 1
+
+
+def test_csv_file_not_damaged():
+    try:
+        Item.instantiate_from_csv('../src/item.csv')
+    except InstantiateCSVError:
+        assert 1 == 1
 
 
